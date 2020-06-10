@@ -3,12 +3,15 @@
 NAME=nginx-certbot-dnsimple
 IMAGE=nrandell/$NAME
 
+
 docker pull ${IMAGE}:latest
+docker stop $NAME
+docker rm $NAME
 
 docker run \
-    --name nginx \
-    --rm \
-    -it \
+    --name $NAME \
+    -d \
+    --restart=always \
     --env-file $PWD/nginx.env \
     --link dashboard:dashboard \
     -v $PWD/letsencrypt:/etc/letsencrypt:rw \
@@ -17,3 +20,4 @@ docker run \
     -p 443:443 \
     ${IMAGE}:latest
 
+docker logs -f $NAME
