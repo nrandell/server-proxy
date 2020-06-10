@@ -1,0 +1,6 @@
+letsencrypt
+dnsimple.ini
+nginx.env
+*.pem
+*.pfx
+*.crt
